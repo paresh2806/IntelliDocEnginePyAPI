@@ -1,0 +1,12 @@
+ pip install flask_cors
+ pip install  "dataflow @ git+https://github.com/tensorpack/dataflow.git"
+ pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
+ python -m pip install 'git+https://github.com/facebookresearch/detectron2.git'
+ pip install deepdoctection[pt]
+
+
+ ### if RuntimeError: Could not infer dtype of numpy.float32
+---->"D:\CIS\cis - 2502\Python-Backend\venv\lib\site-packages\deepdoctection\extern\d2detect.py", line 88, in d2_predict_image
+    image = torch.as_tensor(resized_img.astype("float32").transpose(2, 0, 1))
+    -------> change<--------
+    image = torch.as_tensor(resized_img.astype("float64").transpose(2, 0, 1))

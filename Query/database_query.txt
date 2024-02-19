@@ -1,0 +1,13 @@
+CREATE TABLE location_geom(
+	location_id serial primary key,
+	latitude double precision,
+	longitude double precision,
+	movement_geom geometry(geometry, 4326) NULL
+	);
+	
+	update location_geom set movement_geom= st_setsrid(st_makepoint(longitude, latitude),4326) where movement_geom;
+	
+	insert into location_geom (latitude,longitude)values( 30.3308401, 71.247499);
+	insert into location_geom (latitude,longitude,movement_geom)values( 30.3308401, 71.247499,st_setsrid(st_makepoint(71.247499, 30.3308401),4326));
+	alter table location_geom add column upload_id int;
+	alter table location_geom add constraint location_geom_upload_id_fkey foreign key (upload_id)references users_upload_meta(upload_id);
